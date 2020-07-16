@@ -1,0 +1,30 @@
+[17:31:37.232] Global cache location '/Users/kevinl/Library/Caches/typescript/3.9', safe file path '/users/kevinl/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/typingsafelist.json', types map path /users/kevinl/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/typesmap.json
+[17:31:37.233] Processing cache location '/Users/kevinl/Library/Caches/typescript/3.9'
+[17:31:37.233] Trying to find '/Users/kevinl/Library/Caches/typescript/3.9/package.json'...
+[17:31:37.233] Finished processing cache location '/Users/kevinl/Library/Caches/typescript/3.9'
+[17:31:37.234] Process id: 76484
+[17:31:37.234] NPM location: /usr/local/Cellar/node/14.4.0/bin/npm (explicit '--npmLocation' not  provided)
+[17:31:37.234] validateDefaultNpmLocation: false
+[17:31:37.234] Npm config file: /Users/kevinl/Library/Caches/typescript/3.9/package.json
+[17:31:37.234] Npm config file: '/Users/kevinl/Library/Caches/typescript/3.9/package.json' is missing, creating new one...
+[17:31:37.235] Updating types-registry npm package...
+[17:31:37.235] Exec: /usr/local/Cellar/node/14.4.0/bin/npm install --ignore-scripts types-registry@latest
+[17:31:37.245]     Failed. stdout:
+    
+    stderr:
+    /bin/sh: /usr/local/Cellar/node/14.4.0/bin/npm: No such file or directory
+    
+[17:31:37.245] Updated types-registry npm package
+[17:31:37.245] Types registry file '/Users/kevinl/Library/Caches/typescript/3.9/node_modules/types-registry/index.json' does not exist
+[17:31:37.935] Got install request {"projectName":"/dev/null/inferredProject1*","fileNames":["/Users/kevinl/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/lib.d.ts","/Users/kevinl/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/lib.es5.d.ts","/Users/kevinl/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/lib.dom.d.ts","/Users/kevinl/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/lib.webworker.importscripts.d.ts","/Users/kevinl/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/lib.scripthost.d.ts","/Users/kevinl/Dropbox/myProjects/languages/Elm/picshare/picshare.js"],"compilerOptions":{"target":1,"jsx":1,"allowNonTsExtensions":true,"allowJs":true,"noEmitForJsFiles":true,"maxNodeModuleJsDepth":2},"typeAcquisition":{"enable":true,"include":[],"exclude":[]},"unresolvedImports":[],"projectRootPath":"/Users/kevinl/Dropbox/myProjects/languages/Elm/picshare","kind":"discover"}
+[17:31:37.954] Loaded safelist from types map file '/users/kevinl/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/typesmap.json'
+[17:31:37.955] Explicitly included types: []
+[17:31:37.956] Inferred typings from unresolved imports: []
+[17:31:37.956] Result: {"cachedTypingPaths":[],"newTypingNames":[],"filesToWatch":["/Users/kevinl/Dropbox/myProjects/languages/Elm/picshare/bower_components","/Users/kevinl/Dropbox/myProjects/languages/Elm/picshare/node_modules"]}
+[17:31:37.956] Finished typings discovery: {"cachedTypingPaths":[],"newTypingNames":[],"filesToWatch":["/Users/kevinl/Dropbox/myProjects/languages/Elm/picshare/bower_components","/Users/kevinl/Dropbox/myProjects/languages/Elm/picshare/node_modules"]}
+[17:31:37.956] DirectoryWatcher:: Added:: WatchInfo: /Users/kevinl/Dropbox/myProjects/languages/Elm/picshare/bower_components
+[17:31:37.958] DirectoryWatcher:: Added:: WatchInfo: /Users/kevinl/Dropbox/myProjects/languages/Elm/picshare/node_modules
+[17:31:37.958] Sending response:
+    {"projectName":"/dev/null/inferredProject1*","typeAcquisition":{"enable":true,"include":[],"exclude":[]},"compilerOptions":{"target":1,"jsx":1,"allowNonTsExtensions":true,"allowJs":true,"noEmitForJsFiles":true,"maxNodeModuleJsDepth":2},"typings":[],"unresolvedImports":[],"kind":"action::set"}
+[17:31:37.959] Response has been sent.
+[17:31:37.959] No new typings were requested as a result of typings discovery

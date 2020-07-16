@@ -1,0 +1,17 @@
+Info 0    [17:31:37.43] Starting TS Server
+Info 1    [17:31:37.44] Version: 3.9.2
+Info 2    [17:31:37.44] Arguments: /usr/local/Cellar/node/14.4.0/bin/node /Users/kevinl/.emacs.d/.local/etc/lsp/npm/typescript/bin/tsserver --logFile /Users/kevinl/Dropbox/myProjects/languages/Elm/picshare/.log/tsserver.log --logVerbosity info --cancellationPipeName /private/var/folders/6k/dlvbzb715k71s8blm1r1c0m80000gn/T/3f0192d2e67261c5d28d4b2c50683f61/tscancellation*
+Info 3    [17:31:37.44] Platform: darwin NodeVersion: 14 CaseSensitive: false
+Info 4    [17:31:37.166] Search path: /Users/kevinl/Dropbox/myProjects/languages/Elm/picshare
+Info 5    [17:31:37.167] For info: /Users/kevinl/Dropbox/myProjects/languages/Elm/picshare/picshare.js :: No config files found.
+Info 6    [17:31:37.174] Starting updateGraphWorker: Project: /dev/null/inferredProject1*
+Info 7    [17:31:37.780] Finishing updateGraphWorker: Project: /dev/null/inferredProject1* Version: 1 structureChanged: true Elapsed: 606ms
+Info 8    [17:31:37.781] Project '/dev/null/inferredProject1*' (Inferred)
+Info 9    [17:31:37.781] 	Files (6)
+
+Info 10   [17:31:37.781] -----------------------------------------------
+Info 11   [17:31:37.962] Starting updateGraphWorker: Project: /dev/null/inferredProject1*
+Info 12   [17:31:37.962] Finishing updateGraphWorker: Project: /dev/null/inferredProject1* Version: 2 structureChanged: false Elapsed: 0ms
+Info 13   [17:31:40.465] Before ensureProjectForOpenFiles:
+Info 14   [17:31:40.466] After ensureProjectForOpenFiles:
+Info 15   [17:31:40.466] got projects updated in background, updating diagnostics for /Users/kevinl/Dropbox/myProjects/languages/Elm/picshare/picshare.js
