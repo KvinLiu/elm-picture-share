@@ -11,12 +11,38 @@ baseUrl =
     "https://programming-elm.com/"
 
 
+type alias Model =
+    { url : String
+    , caption : String
+    , liked : Bool
+    }
+
+
 type Msg
-    = Unlike
-    | Like
+    = ToggleLike
 
 
-viewDetailedPhoto : { url : String, caption : String, liked : Bool } -> Html Msg
+initialModel : Model
+initialModel =
+    Model (baseUrl ++ "1.jpg") "Surfing!" False
+
+
+viewLoveButton : Model -> Html Msg
+viewLoveButton model =
+    let
+        buttonClass =
+            if model.liked then
+                "fa-heart"
+
+            else
+                "fa-heart-o"
+    in
+    div [ class "like-button" ]
+        [ i [ class "fa fa-2x", class buttonClass, onClick ToggleLike ] []
+        ]
+
+
+viewDetailedPhoto : Model -> Html Msg
 viewDetailedPhoto model =
     let
         buttonClass =
@@ -25,34 +51,17 @@ viewDetailedPhoto model =
 
             else
                 "fa-heart-o"
-
-        msg =
-            if model.liked then
-                Unlike
-
-            else
-                Like
     in
     div [ class "detailed-photo" ]
         [ img [ src model.url ] []
         , div [ class "photo-info" ]
-            [ div [ class "like-button" ]
-                [ i [ class "fa fa-2x", class buttonClass, onClick msg ] []
-                ]
+            [ viewLoveButton model
             , h2 [ class "caption" ] [ text model.caption ]
             ]
         ]
 
 
-initialModel : { url : String, caption : String, liked : Bool }
-initialModel =
-    { url = baseUrl ++ "1.jpg"
-    , caption = "Surfing"
-    , liked = False
-    }
-
-
-view : { url : String, caption : String, liked : Bool } -> Html Msg
+view : Model -> Html Msg
 view model =
     div []
         [ div [ class "header" ] [ h1 [] [ text "PicShare!" ] ]
@@ -61,17 +70,14 @@ view model =
         ]
 
 
-update : Msg -> { url : String, caption : String, liked : Bool } -> { url : String, caption : String, liked : Bool }
+update : Msg -> Model -> Model
 update msg model =
     case msg of
-        Like ->
-            { model | liked = True }
-
-        Unlike ->
-            { model | liked = False }
+        ToggleLike ->
+            { model | liked = not model.liked }
 
 
-main : Program () { url : String, caption : String, liked : Bool } Msg
+main : Program () Model Msg
 main =
     Browser.sandbox
         { init = initialModel
