@@ -1,4 +1,5 @@
 .log/
-TAGS
 elm-stuff/
-elm-stuff
+/elm-stuff
+TAG
+/elm-stuff/0.19.1/

@@ -1,0 +1,14 @@
+
+src/Picshare.elm,381
+module PicsharePicshare1,0
+baseUrl =baseUrl10,176
+type alias Model =type14,223
+type alias ModelModel14,223
+type MsgMsg21,311
+    = ToggleLikeToggleLike22,320
+initialModel =initialModel26,360
+viewLoveButton model =viewLoveButton31,460
+viewDetailedPhoto model =viewDetailedPhoto46,783
+view model =view65,1205
+update msg model =update74,1415
+main =main81,1550
