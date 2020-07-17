@@ -52,16 +52,7 @@ photoDecoder =
 
 initialModel : Model
 initialModel =
-    { photo =
-        Just
-            { id = 1
-            , url = baseUrl ++ "1.jpg"
-            , caption = "Surfing!"
-            , liked = False
-            , comments = [ "Cowabunga, dude!" ]
-            , newComment = ""
-            }
-    }
+    { photo = Nothing }
 
 
 fetchFeed : Cmd Msg
@@ -146,7 +137,8 @@ viewFeed maybePhoto =
             viewDetailedPhoto photo
 
         Nothing ->
-            text ""
+            div [ class "loading-feed" ]
+                [ text "Loading Feed..." ]
 
 
 view : Model -> Html Msg
@@ -213,7 +205,12 @@ update msg model =
             , Cmd.none
             )
 
-        LoadFeed _ ->
+        LoadFeed (Ok photo) ->
+            ( { model | photo = Just photo }
+            , Cmd.none
+            )
+
+        LoadFeed (Err _) ->
             ( model, Cmd.none )
 
 
