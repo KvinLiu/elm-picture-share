@@ -40,7 +40,9 @@ type alias Feed =
 
 
 type alias Model =
-    { feed : Maybe Feed }
+    { feed : Maybe Feed
+    , error : Maybe Http.Error
+    }
 
 
 photoDecoder : Decoder Photo
@@ -56,7 +58,9 @@ photoDecoder =
 
 initialModel : Model
 initialModel =
-    { feed = Nothing }
+    { feed = Nothing
+    , error = Nothing
+    }
 
 
 fetchFeed : Cmd Msg
@@ -153,12 +157,33 @@ viewFeed maybeFeed =
                 [ text "Loading Feed..." ]
 
 
+errorMessage : Http.Error -> String
+errorMessage error =
+    case error of
+        Http.BadBody _ ->
+            """Sorry, we couldn't process your feed at this time. We're working on it!"""
+
+        _ ->
+            """Sorry, we couldn't load your feed at this time. Please try again later."""
+
+
+viewContent : Model -> Html Msg
+viewContent model =
+    case model.error of
+        Just error ->
+            div [ class "feed-error" ]
+                [ text (errorMessage error) ]
+
+        Nothing ->
+            viewFeed model.feed
+
+
 view : Model -> Html Msg
 view model =
     div []
         [ div [ class "header" ] [ h1 [] [ text "PicShare!" ] ]
         , div [ class "content-flow" ]
-            [ viewFeed model.feed ]
+            [ viewContent model ]
         ]
 
 
@@ -235,8 +260,10 @@ update msg model =
             , Cmd.none
             )
 
-        LoadFeed (Err _) ->
-            ( model, Cmd.none )
+        LoadFeed (Err error) ->
+            ( { model | error = Just error }
+            , Cmd.none
+            )
 
 
 main : Program () Model Msg
