@@ -20,7 +20,7 @@
        var app = Elm.Picshare.init({
          node: document.getElementById("main")
        })
-       app.ports.listen.subscrib(listen)
+       app.ports.listen.subscribe(listen)
        function listen(url) {
          var socket = new WebSocket(url)
          socket.onmessage = function (event) {
