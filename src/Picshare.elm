@@ -36,7 +36,7 @@ type alias Photo =
 
 
 type alias Model =
-    Photo
+    { photo : Maybe Photo }
 
 
 photoDecoder : Decoder Photo
@@ -52,12 +52,15 @@ photoDecoder =
 
 initialModel : Model
 initialModel =
-    { id = 1
-    , url = baseUrl ++ "1.jpg"
-    , caption = "Surfing!"
-    , liked = False
-    , comments = [ "Cowabunga, dude!" ]
-    , newComment = ""
+    { photo =
+        Just
+            { id = 1
+            , url = baseUrl ++ "1.jpg"
+            , caption = "Surfing!"
+            , liked = False
+            , comments = [ "Cowabunga, dude!" ]
+            , newComment = ""
+            }
     }
 
 
@@ -74,11 +77,11 @@ init () =
     ( initialModel, fetchFeed )
 
 
-viewLoveButton : Model -> Html Msg
-viewLoveButton model =
+viewLoveButton : Photo -> Html Msg
+viewLoveButton photo =
     let
         buttonClass =
-            if model.liked then
+            if photo.liked then
                 "fa-heart"
 
             else
@@ -107,33 +110,43 @@ viewCommentList comments =
             div [ class "comments" ] [ ul [] (List.map viewComment comments) ]
 
 
-viewComments : Model -> Html Msg
-viewComments model =
+viewComments : Photo -> Html Msg
+viewComments photo =
     div []
-        [ viewCommentList model.comments
+        [ viewCommentList photo.comments
         , form [ class "new-comment", onSubmit SaveComment ]
             [ input
                 [ type_ "text"
                 , placeholder "Add a comment..."
-                , value model.newComment
+                , value photo.newComment
                 , onInput UpdateComment
                 ]
                 []
-            , button [ disabled (String.isEmpty model.newComment) ] [ text "Save" ]
+            , button [ disabled (String.isEmpty photo.newComment) ] [ text "Save" ]
             ]
         ]
 
 
-viewDetailedPhoto : Model -> Html Msg
-viewDetailedPhoto model =
+viewDetailedPhoto : Photo -> Html Msg
+viewDetailedPhoto photo =
     div [ class "detailed-photo" ]
-        [ img [ src model.url ] []
+        [ img [ src photo.url ] []
         , div [ class "photo-info" ]
-            [ viewLoveButton model
-            , h2 [ class "caption" ] [ text model.caption ]
-            , viewComments model
+            [ viewLoveButton photo
+            , h2 [ class "caption" ] [ text photo.caption ]
+            , viewComments photo
             ]
         ]
+
+
+viewFeed : Maybe Photo -> Html Msg
+viewFeed maybePhoto =
+    case maybePhoto of
+        Just photo ->
+            viewDetailedPhoto photo
+
+        Nothing ->
+            text ""
 
 
 view : Model -> Html Msg
@@ -141,23 +154,23 @@ view model =
     div []
         [ div [ class "header" ] [ h1 [] [ text "PicShare!" ] ]
         , div [ class "content-flow" ]
-            [ viewDetailedPhoto model ]
+            [ viewFeed model.photo ]
         ]
 
 
-saveNewComment : Model -> Model
-saveNewComment model =
+saveNewComment : Photo -> Photo
+saveNewComment photo =
     let
         comment =
-            String.trim model.newComment
+            String.trim photo.newComment
     in
     case comment of
         "" ->
-            model
+            photo
 
         _ ->
-            { model
-                | comments = model.comments ++ [ comment ]
+            { photo
+                | comments = photo.comments ++ [ comment ]
                 , newComment = ""
             }
 
@@ -167,21 +180,36 @@ subscriptions model =
     Sub.none
 
 
+toggleLike : Photo -> Photo
+toggleLike photo =
+    { photo | liked = not photo.liked }
+
+
+updateComment : String -> Photo -> Photo
+updateComment comment photo =
+    { photo | newComment = comment }
+
+
+updateFeed : (Photo -> Photo) -> Maybe Photo -> Maybe Photo
+updateFeed updatePhoto maybePhoto =
+    Maybe.map updatePhoto maybePhoto
+
+
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         ToggleLike ->
-            ( { model | liked = not model.liked }
+            ( { model | photo = updateFeed toggleLike model.photo }
             , Cmd.none
             )
 
         UpdateComment comment ->
-            ( { model | newComment = comment }
+            ( { model | photo = updateFeed (updateComment comment) model.photo }
             , Cmd.none
             )
 
         SaveComment ->
-            ( saveNewComment model
+            ( { model | photo = updateFeed saveNewComment model.photo }
             , Cmd.none
             )
 
